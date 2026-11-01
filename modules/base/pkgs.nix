@@ -1,10 +1,14 @@
+{ self, ... }:
 {
   flake.nixosModules.base-pkgs =
     { pkgs, ... }:
+    let
+      selfpkgs = self.packages."${pkgs.stdenv.hostPlatform.system}";
+    in
     {
       environment.systemPackages = with pkgs; [
         # base
-        git
+        selfpkgs.git
         vim
         wget
         curl
