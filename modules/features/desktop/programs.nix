@@ -1,8 +1,16 @@
-{ inputs, self, ... }:
+{
+  inputs,
+  self,
+  ...
+}:
 {
   flake.nixosModules.desktop-pkgs =
-    { pkgs, ... }:
+    {
+      pkgs,
+      ...
+    }:
     let
+      nixpakApps = inputs.nixpak-apps.packages.${pkgs.stdenv.hostPlatform.system};
       selfpkgs = self.packages."${pkgs.stdenv.hostPlatform.system}";
     in
     {
@@ -21,14 +29,18 @@
         # chat
         deltachat-desktop
         selfpkgs.aerion
-        selfpkgs.vesktop # 内置 Vencord 的 Discord 替代客户端
-        selfpkgs.nheko # Desktop client for the Matrix protocol
-        selfpkgs.telegram
-        selfpkgs.dingtalk
-        selfpkgs.feishu
-        selfpkgs.qq
-        selfpkgs.wechat
-        selfpkgs.wechat-uos
+
+        # nixpak-apps
+        nixpakApps.vesktop # 内置 Vencord 的 Discord 替代客户端
+        nixpakApps.nheko # Desktop client for the Matrix protocol
+        nixpakApps.telegram
+        nixpakApps.dingtalk
+        nixpakApps.feishu
+        nixpakApps.qq
+        nixpakApps.wechat
+        nixpakApps.wechat-uos
+        nixpakApps.bottles
+        nixpakApps.heroic
 
         selfpkgs.fuzzel
 
@@ -89,8 +101,6 @@
         cliphist
 
         # gaming
-        selfpkgs.bottles
-        selfpkgs.heroic
         hmcl
         selfpkgs.hyprism
         mangohud

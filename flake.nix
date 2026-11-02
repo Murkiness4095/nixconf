@@ -34,8 +34,8 @@
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
-    nixpak = {
-      url = "github:nixpak/nixpak";
+    nixpak-apps = {
+      url = "github:Murkiness4095/nixpak-apps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
