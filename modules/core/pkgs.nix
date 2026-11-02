@@ -37,7 +37,7 @@
         nixfmt
         nixpkgs-fmt
         mcp-nixos
-        tmux
+        herdr
         yazi
 
         ffmpeg-full

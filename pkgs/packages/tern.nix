@@ -1,18 +1,3 @@
-# tern — Stencil Tern, the agent IDE (https://tern.build), official beta builds.
-# Flake-parts module: packages.<system>.tern
-#   x86_64-linux   → Tern-<v>-linux-x86_64.tar.gz  (CLI + TUI)
-#   aarch64-linux  → Tern-<v>-linux-arm64.tar.gz   (CLI + TUI)
-#   aarch64-darwin → Tern-<v>-macos-arm64.dmg      (Tern.app; bin/tern launches it)
-#
-# Assets come from the official build page (https://build.stencil.so/tern), which
-# is invite-only: every /d/ request must carry the approved account's session
-# cookie, so `.stencil-cookie` (Netscape cookie-file format, mode 600) sits next
-# to this file and curl hands it over for the 302 to the signed R2 URL.
-#   regenerate: sqlite3 <profile>/cookies.sqlite \
-#     "SELECT value FROM moz_cookies WHERE host='.stencil.so'"
-#   then: printf '# Netscape HTTP Cookie File\n.stencil.so\tTRUE\t/\tTRUE\t<expiry>\t__Secure-stencil_session\t<value>\n'
-# A build id changes with every upstream build, so updating Tern means editing
-# `version`, `buildId` and the three hashes (SHA-256 from the build API, as SRI).
 {
   lib,
   inputs,
@@ -22,15 +7,13 @@
   perSystem =
     { system, ... }:
     let
-      # Tern 为闭源分发（unfree）：自建 allowUnfree 的 pkgs，
-      # 否则 checkMeta 在构造 derivation 时就拒绝求值。
       pkgs = import inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
 
-      version = "0.9.8";
-      buildId = "20261029-165156-f21d9a3";
+      version = "0.9.9";
+      buildId = "20261031-151729-9c1c09f";
       pname = "tern";
       baseUrl = "https://build.stencil.so/d/tern/${buildId}";
 
@@ -40,37 +23,33 @@
       assets = {
         x86_64-linux = {
           asset = "Tern-${version}-linux-x86_64.tar.gz";
-          hash = "sha256-TCCTx1UXTmAtT4bJeB5UOhVkrxrvI/NCFSLUNs9goFQ=";
+          sha256 = "04565b2da6e232f4ca1ca40a2e56aa28a26f89fc1094634906584631e413993f";
         };
         aarch64-linux = {
           asset = "Tern-${version}-linux-arm64.tar.gz";
-          hash = "sha256-712FgjEw+ebr2il4ZLxxIZofoUVOnwXXVpV2D1kqHQg=";
+          sha256 = "bdfc119cbebda065ae517ec718e2a81071598e0a95e2f8b53bf94bbacb760b88";
         };
         aarch64-darwin = {
           asset = "Tern-${version}-macos-arm64.dmg";
-          hash = "sha256-w1Tj65Xa7TeOSaFbxBkJv9uXIXZP7u14TmRopijm7+c=";
+          sha256 = "ffebab0f3b64ef1b40cc036c9984753f1e2c0db5f4dba485cad1917f4cbb190f";
         };
       };
 
       meta = {
         description = "Tern — the agent IDE: terminals, panes and agents in one workspace";
         homepage = "https://tern.build";
-        changelog = "https://build.stencil.so/tern";
         license = lib.licenses.unfree;
-        sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
         mainProgram = pname;
         platforms = builtins.attrNames assets;
-        maintainers = [ ];
       };
 
       src = pkgs.fetchurl {
         url = "${baseUrl}/${assets.${system}.asset}";
-        inherit (assets.${system}) hash;
+        sha256 = assets.${system}.sha256;
         name = assets.${system}.asset;
         inherit curlOpts;
       };
 
-      # Tern-<v>-linux-*.tar.gz holds a single Rust binary at tern/tern.
       linuxPackage = pkgs.stdenv.mkDerivation {
         inherit
           pname
@@ -82,31 +61,26 @@
           pkgs.autoPatchelfHook
           pkgs.makeWrapper
         ];
-        buildInputs = [ pkgs.stdenv.cc.cc.lib ];
-        # Tern dlopen()s its display/GPU stack at runtime, so autoPatchelfHook
-        # cannot see these as DT_NEEDED entries. Put them on LD_LIBRARY_PATH.
+        buildInputs = [
+          pkgs.stdenv.cc.cc.lib
+          pkgs.libxcb
+          pkgs.libxkbcommon
+          pkgs.mesa
+          pkgs.vulkan-loader
+          pkgs.glib
+        ];
         installPhase = ''
           runHook preInstall
-          # The tarball's single top-level directory is tern/, so unpacking
-          # already put us beside the binary.
           install -Dm755 tern $out/bin/tern
           runHook postInstall
         '';
         postFixup = ''
           wrapProgram $out/bin/tern \
-            --prefix LD_LIBRARY_PATH : ${
-              lib.makeLibraryPath (with pkgs; [
-                libxcb
-                libxkbcommon
-                wayland
-                libglvnd
-                mesa
-              ])
-            }
+            --prefix LD_LIBRARY_PATH : ${pkgs.libxcb}/lib:${pkgs.libxkbcommon}/lib:${pkgs.mesa}/lib:${pkgs.vulkan-loader}/lib \
+            --prefix PATH : ${pkgs.glib}/bin
         '';
       };
 
-      # Tern-<v>-macos-arm64.dmg holds Tern.app (Contents/MacOS/tern).
       darwinPackage = pkgs.stdenvNoCC.mkDerivation {
         inherit
           pname
@@ -126,7 +100,6 @@
           makeWrapper $out/Applications/Tern.app/Contents/MacOS/tern $out/bin/${pname}
           runHook postInstall
         '';
-        # Never run fixup over a signed, notarized app bundle.
         dontFixup = true;
       };
     in
