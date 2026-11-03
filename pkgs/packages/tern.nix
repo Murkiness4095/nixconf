@@ -12,26 +12,30 @@
         config.allowUnfree = true;
       };
 
-      version = "0.9.9";
-      buildId = "20261031-151729-9c1c09f";
+      version = "0.9.10";
+      buildId = "20261102-152242-2ad447b";
       pname = "tern";
       baseUrl = "https://build.stencil.so/d/tern/${buildId}";
 
-      cookieFile = ./.stencil-cookie;
-      curlOpts = lib.optionalString (builtins.pathExists cookieFile) "-b ${cookieFile}";
+      # `.stencil-cookie` is gitignored, so it comes in as the `stencilCookie`
+      # flake input (a store copy). Regenerate when the session cookie changes:
+      #   nix store add --mode flat --name stencil-cookie .stencil-cookie
+      # then update the path in flake.nix.
+      cookieFile = inputs.stencilCookie;
+      curlOpts = "-b ${cookieFile}";
 
       assets = {
         x86_64-linux = {
           asset = "Tern-${version}-linux-x86_64.tar.gz";
-          sha256 = "04565b2da6e232f4ca1ca40a2e56aa28a26f89fc1094634906584631e413993f";
+          sha256 = "5bd782328df0ee2330f34f60c407a2f0252bac6e806e620d22b744bcead4c6d5";
         };
         aarch64-linux = {
           asset = "Tern-${version}-linux-arm64.tar.gz";
-          sha256 = "bdfc119cbebda065ae517ec718e2a81071598e0a95e2f8b53bf94bbacb760b88";
+          sha256 = "a78ce59dcf857296c6d6d1c6801df7f4ce35281ce58ffc8e41777baa491d9cb4";
         };
         aarch64-darwin = {
           asset = "Tern-${version}-macos-arm64.dmg";
-          sha256 = "ffebab0f3b64ef1b40cc036c9984753f1e2c0db5f4dba485cad1917f4cbb190f";
+          sha256 = "4e0bcdd358ac14214bf7f0c2a0e995e392232ab4c6530c216edc8a29be454b28";
         };
       };
 
@@ -51,16 +55,8 @@
       };
 
       linuxPackage = pkgs.stdenv.mkDerivation {
-        inherit
-          pname
-          version
-          meta
-          src
-          ;
-        nativeBuildInputs = [
-          pkgs.autoPatchelfHook
-          pkgs.makeWrapper
-        ];
+        inherit pname version meta src;
+        nativeBuildInputs = [ pkgs.autoPatchelfHook pkgs.makeWrapper ];
         buildInputs = [
           pkgs.stdenv.cc.cc.lib
           pkgs.libxcb
@@ -82,12 +78,7 @@
       };
 
       darwinPackage = pkgs.stdenvNoCC.mkDerivation {
-        inherit
-          pname
-          version
-          meta
-          src
-          ;
+        inherit pname version meta src;
         nativeBuildInputs = [
           pkgs.makeWrapper
           pkgs.undmg
@@ -104,6 +95,7 @@
       };
     in
     lib.mkIf (builtins.hasAttr system assets) {
-      packages.${pname} = if pkgs.stdenv.hostPlatform.isDarwin then darwinPackage else linuxPackage;
+      packages.${pname} =
+        if pkgs.stdenv.hostPlatform.isDarwin then darwinPackage else linuxPackage;
     };
 }

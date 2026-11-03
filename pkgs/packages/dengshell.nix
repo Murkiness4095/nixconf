@@ -17,11 +17,11 @@
       # ── 官方发行版声明：跟随官方更新的唯一改动点 ──────────────────────────
       release = {
         # Releases 页最新 tag，形如 v0.03-build.20261003101
-        tag = "v0.03-build.20261003101";
+        tag = "v0.03-build.20261011106";
         # deb control 中的 Version（0.3.0-101 的上游版本部分）
         version = "0.3.0";
         # `nix hash file --type sha256 DengShell-linux-x64.deb`
-        sha256 = "sha256-Kcbgrfkp93zU2qDoUHEyP7LOLpGcPSJBgb6C8uVOQv4=";
+        sha256 = "3481612c66af6b0d2ec285aa4c95dd3e8519438a38b561c968086a397daa5736";
       };
 
       # 官方只发 x64 glibc 包
@@ -62,14 +62,14 @@
 
           # 用 dpkg 直接解 deb，不走 unpackPhase
           nativeBuildInputs = [
-            pkgs.autoPatchelfHook
             pkgs.dpkg
             pkgs.makeWrapper
           ];
           dontUnpack = true;
 
-          # 把上游 ELF 的 interpreter / RPATH 指向 nixpkgs 库，避免污染 LD_LIBRARY_PATH
-          autoPatchelf = true;
+          # patchelf 会破坏这个 Go 二进制的入口（启动即 SIGSEGV），
+          # 因此保留上游 ELF，仅用 wrapper 提供库路径。
+          dontAutoPatchelf = true;
           buildInputs = runtimeLibs;
 
           installPhase = ''
@@ -99,6 +99,7 @@
 
             makeWrapper "$out/libexec/dengshell/data/support/start.sh" "$out/bin/dengshell" \
               --prefix PATH : ${lib.makeBinPath runtimeBins} \
+              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeLibs} \
               --suffix XDG_DATA_DIRS : "$out/share:${pkgs.gdk-pixbuf}/share"
 
             runHook postInstall
@@ -125,7 +126,7 @@
       # 否则 start.sh 的启动前检查会直接拒绝启动。
       checks.dengshell-links = lib.mkIf supported (
         pkgs.runCommand "dengshell-links-check" { nativeBuildInputs = [ pkgs.glibc pkgs.binutils ]; } ''
-          export LD_LIBRARY_PATH=${lib.makeSearchPath "lib" runtimeLibs}
+          export LD_LIBRARY_PATH=${lib.makeLibraryPath runtimeLibs}
           missing=$(LC_ALL=C ldd ${pkg}/libexec/dengshell/dengshell | grep 'not found' || true)
           if [ -n "$missing" ]; then
             echo "DengShell ELF 存在未解析的依赖：" >&2
