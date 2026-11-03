@@ -20,6 +20,7 @@
         self.nixosModules.desktop-pkgs
         # self.nixosModules.alacritty
         # self.nixosModules.kitty
+        self.nixosModules.hjem
         self.nixosModules.theme
         # self.nixosModules.vscode
         # self.nixosModules.zed
