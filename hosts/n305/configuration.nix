@@ -12,7 +12,7 @@
 
   flake.nixosModules.node-n305 = { lib, pkgs, ... }: {
     imports = [
-      self.nixosModules.core
+        # self.nixosModules.core
       self.nixosModules.base
 
       self.diskoConfigurations.n305

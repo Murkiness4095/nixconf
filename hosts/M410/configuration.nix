@@ -28,7 +28,7 @@
       imports = [
         # # Include the results of the hardware scan.
         # ./hardware-configuration.nix
-        self.nixosModules.core
+        # self.nixosModules.core
         self.nixosModules.base
 
         self.nixosModules.sops-nix

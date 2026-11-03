@@ -19,7 +19,7 @@
     }:
     {
       imports = [
-        self.nixosModules.core
+        # self.nixosModules.core
         self.nixosModules.base
         self.nixosModules.desktop
 

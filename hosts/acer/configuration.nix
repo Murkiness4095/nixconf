@@ -13,7 +13,7 @@
   flake.nixosModules.node-acer = { lib, pkgs, ... }: {
     imports = [
       self.nixosModules.base
-      self.nixosModules.core
+        # self.nixosModules.core
       # self.nixosModules.desktop
 
       # self.diskoConfigurations.acer

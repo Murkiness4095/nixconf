@@ -21,8 +21,8 @@
       # flake input (a store copy). Regenerate when the session cookie changes:
       #   nix store add --mode flat --name stencil-cookie .stencil-cookie
       # then update the path in flake.nix.
-      cookieFile = inputs.stencilCookie;
-      curlOpts = "-b ${cookieFile}";
+      # cookieFile = inputs.stencilCookie;
+      # curlOpts = "-b ${cookieFile}";
 
       assets = {
         x86_64-linux = {
@@ -51,12 +51,19 @@
         url = "${baseUrl}/${assets.${system}.asset}";
         sha256 = assets.${system}.sha256;
         name = assets.${system}.asset;
-        inherit curlOpts;
       };
 
       linuxPackage = pkgs.stdenv.mkDerivation {
-        inherit pname version meta src;
-        nativeBuildInputs = [ pkgs.autoPatchelfHook pkgs.makeWrapper ];
+        inherit
+          pname
+          version
+          meta
+          src
+          ;
+        nativeBuildInputs = [
+          pkgs.autoPatchelfHook
+          pkgs.makeWrapper
+        ];
         buildInputs = [
           pkgs.stdenv.cc.cc.lib
           pkgs.libxcb
@@ -78,7 +85,12 @@
       };
 
       darwinPackage = pkgs.stdenvNoCC.mkDerivation {
-        inherit pname version meta src;
+        inherit
+          pname
+          version
+          meta
+          src
+          ;
         nativeBuildInputs = [
           pkgs.makeWrapper
           pkgs.undmg
@@ -95,7 +107,6 @@
       };
     in
     lib.mkIf (builtins.hasAttr system assets) {
-      packages.${pname} =
-        if pkgs.stdenv.hostPlatform.isDarwin then darwinPackage else linuxPackage;
+      packages.${pname} = if pkgs.stdenv.hostPlatform.isDarwin then darwinPackage else linuxPackage;
     };
 }
