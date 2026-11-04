@@ -11,10 +11,6 @@
   };
 
   flake.nixosModules.node-M410 =
-    # Edit this configuration file to define what should be installed on
-    # your system. Help is available in the configuration.nix(5) man page, on
-    # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
     {
       config,
       lib,
@@ -26,9 +22,6 @@
     in
     {
       imports = [
-        # # Include the results of the hardware scan.
-        # ./hardware-configuration.nix
-        # self.nixosModules.core
         self.nixosModules.base
 
         self.nixosModules.sops-nix
@@ -49,7 +42,7 @@
         self.nixosModules.zswap
 
         # proxy
-        self.nixosModules.flclash
+        # self.nixosModules.mihomo
       ];
 
       boot.kernelPackages = pkgs.linuxPackages_latest;

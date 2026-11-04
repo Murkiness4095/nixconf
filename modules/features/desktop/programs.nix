@@ -53,6 +53,9 @@
         # editor
         selfpkgs.vscode
         selfpkgs.zed
+        selfpkgs.floral-notepaper
+        kdePackages.kate
+        kdePackages.plasma-integration
 
         # terminal
         selfpkgs.alacritty
@@ -71,14 +74,6 @@
 
         # office
         libreoffice
-
-        # Note
-        # joplin-desktop
-        obsidian
-        selfpkgs.floral-notepaper
-
-        kdePackages.kate
-        kdePackages.plasma-integration
 
         # book
         readest

@@ -19,8 +19,8 @@
 
     ccicnce113424.url = "github:ccicnce113424/nix-packages";
     disko.url = "github:nix-community/disko/latest";
-    flclash-nix.url = "github:yefada/flclash-nix";
     impermanence.url = "github:nix-community/impermanence";
+    preservation.url = "github:nix-community/preservation";
     nix-gaming.url = "github:fufexan/nix-gaming";
     omp-nix.url = "github:yuxqiu/omp-nix";
     sops-nix.url = "github:Mic92/sops-nix";

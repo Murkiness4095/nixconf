@@ -100,6 +100,7 @@
             makeWrapper "$out/libexec/dengshell/data/support/start.sh" "$out/bin/dengshell" \
               --prefix PATH : ${lib.makeBinPath runtimeBins} \
               --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeLibs} \
+              --set-default WEBKIT_DISABLE_DMABUF_RENDERER 1 \
               --suffix XDG_DATA_DIRS : "$out/share:${pkgs.gdk-pixbuf}/share"
 
             runHook postInstall

@@ -24,6 +24,7 @@
         # base
         selfpkgs.git
         selfpkgs.fastfetch
+        selfpkgs.napcat
         vim
         wget
         curl
