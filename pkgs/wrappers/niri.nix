@@ -508,7 +508,6 @@
             border {
                 // The settings are the same as for the focus ring.
                 // If you enable the border, you probably want to disable the focus ring.
-                off
 
                 width 1.5
                 active-color "#ffc87f"
@@ -585,8 +584,6 @@
             transform "normal"
             position x=0 y=0
 
-            // 关闭笔记本内屏
-            off
         }
 
         // 外接 KTC 显示器 (1080p 120Hz)
