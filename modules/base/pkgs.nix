@@ -23,16 +23,12 @@
         package = pkgs.yazi;
       };
 
-      programs.neovim = {
-        enable = true;
-        package = selfpkgs.neovim;
-      };
-
       environment.systemPackages = with pkgs; [
         # base
         selfpkgs.git
         selfpkgs.fastfetch
         selfpkgs.napcat
+        selfpkgs.neovim
         vim
         wget
         curl

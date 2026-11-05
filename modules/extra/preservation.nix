@@ -7,6 +7,8 @@
         inputs.preservation.nixosModules.default
       ];
 
+      systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
+
       preservation = {
         enable = true;
 
@@ -30,8 +32,8 @@
               file = "/etc/machine-id";
               inInitrd = true;
             }
-            "/etc/ssh/ssh_host_ed25519_key"
-            "/etc/ssh/ssh_host_ed25519_key.pub"
+            { file = "/etc/ssh/ssh_host_ed25519_key"; mode = "0600"; }
+            { file = "/etc/ssh/ssh_host_ed25519_key.pub"; mode = "0644"; }
           ];
 
           users.${user} = {
