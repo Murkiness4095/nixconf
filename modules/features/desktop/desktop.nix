@@ -7,23 +7,14 @@
     in
     {
       imports = [
-        # self.nixosModules.dms-shell
-        # self.nixosModules.noctalia
-        # self.nixosModules.niri
-        # self.nixosModules.umbriel
         self.nixosModules.greeter
         self.nixosModules.thunar
 
         self.nixosModules.fcitx5
         # self.nixosModules.ibus
-        # self.nixosModules.fuzzel
         self.nixosModules.desktop-pkgs
-        # self.nixosModules.alacritty
-        # self.nixosModules.kitty
         self.nixosModules.hjem
         self.nixosModules.theme
-        # self.nixosModules.vscode
-        # self.nixosModules.zed
         self.nixosModules.gaming
 
         self.nixosModules.i18n

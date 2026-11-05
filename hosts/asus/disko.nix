@@ -9,7 +9,6 @@
     ];
 
     disko.devices = {
-      # 内存 tmpfs 根目录 (Impermanence 临时根目录)
       nodev."/" = {
         fsType = "tmpfs";
         mountOptions = [

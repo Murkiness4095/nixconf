@@ -30,8 +30,11 @@
         self.nixosModules.zswap
 
         self.diskoConfigurations.asus
-        self.nixosModules.impermanence
+        self.nixosModules.preservation
         self.nixosModules.sops-nix
+
+        # agents
+        self.nixosModules.agents
 
         # services
         self.nixosModules.adguardhome

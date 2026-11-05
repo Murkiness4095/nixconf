@@ -131,14 +131,6 @@
 
         nwg-look # 设置gtk主题
 
-        # vibe coding
-        opencode
-        # opencode-desktop
-        inputs.omp-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
-        selfpkgs.tern
-        selfpkgs.omp-gui
-        bun
-
         # system-pkgs
         mesa-demos
         gamescope
