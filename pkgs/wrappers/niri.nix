@@ -583,6 +583,8 @@
             scale 1.5
             transform "normal"
             position x=0 y=0
+            // 关闭笔记本内屏
+            off
 
         }
 

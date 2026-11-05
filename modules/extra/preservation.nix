@@ -35,6 +35,7 @@
           ];
 
           users.${user} = {
+            commonMountOptions = [ "x-gvfs-hide" ];
             directories = [
               "Desktop"
               "Documents"

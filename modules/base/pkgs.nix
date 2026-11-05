@@ -18,7 +18,15 @@
 
       users.users.${user}.shell = selfpkgs.fish;
 
-      programs.yazi.enable = true;
+      programs.yazi = {
+        enable = true;
+        package = pkgs.yazi;
+      };
+
+      programs.neovim = {
+        enable = true;
+        package = selfpkgs.neovim;
+      };
 
       environment.systemPackages = with pkgs; [
         # base
