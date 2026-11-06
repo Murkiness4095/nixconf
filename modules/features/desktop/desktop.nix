@@ -19,8 +19,8 @@
 
         self.nixosModules.i18n
         self.nixosModules.display-control
-        self.nixosModules.pipewire
-        self.nixosModules.power
+        # self.nixosModules.pipewire
+        # self.nixosModules.power
       ];
 
       programs.niri = {

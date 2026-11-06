@@ -16,6 +16,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixos-sheng.url = "github:Murkiness4095/nixos-sheng";
 
     ccicnce113424.url = "github:ccicnce113424/nix-packages";
     disko.url = "github:nix-community/disko/latest";
