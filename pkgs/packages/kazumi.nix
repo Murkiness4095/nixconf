@@ -31,11 +31,11 @@ let
     };
     aarch64-linux = {
       artifact = "Kazumi_linux_${version}_arm64.deb";
-      hash = "sha256-uQiImjfpzeckbjqAcRqllA6XE6IODslqhzAriceNkAY=";
+      hash = "sha256-+XH23QQLLfqxGU9F53L3A/bGN3uq/R0YBggff/aafy4=";
     };
     aarch64-darwin = {
       artifact = "Kazumi_macos_${version}.dmg";
-      hash = "sha256-Sx8Mhv0jte6ITVOGSqrHj5ezEX+ruUL/GNNR340MopA=";
+      hash = "sha256-MltS0vG4SkgsldrB8Tltq6nRBvKuTq2hlnexXBTPOac=";
     };
   };
 
