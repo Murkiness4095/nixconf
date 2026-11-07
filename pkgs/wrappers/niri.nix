@@ -577,6 +577,13 @@
         // ===== outputs.kdl =====
         // --- 显示器配置 ---
 
+        ${lib.optionalString pkgs.stdenv.hostPlatform.isAarch64 ''
+          // sheng 内屏：保留原生分辨率，120 Hz 支持焦点触控笔。
+          output "DSI-1" {
+              mode "3048x2032@120"
+          }
+        ''}
+
         // 笔记本内置显示器 (Chimei Innolux 2.5K 165Hz)
         output "eDP-1" {
             mode "2560x1440@165.003"
