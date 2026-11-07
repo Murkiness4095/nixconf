@@ -2,6 +2,7 @@ keys:
   - &admin_admin age1nk6hjzmccz7ulqzquvzr4rlyh5swtay6290at5quagmnyhwhl5pqcrj2j7
   - &host_asus age1rceszxp0n5xwmhgyp203rv9npsvcuvw78m2wa8ufywf4dfw5535qypheh4
   - &host_n305 age1ee2hnhypukpneert99drtrpxgqgwn286pn5q6798cgtm7p8z2fwqvphv7l
+  - &host_sheng age15npvp5zgat6gk7cjj5up88ajry4lxp5yyxq6kxys4y87w07nkggq647u4k
 
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json)$
@@ -10,3 +11,4 @@ creation_rules:
           - *admin_admin
           - *host_asus
           - *host_n305
+          - *host_sheng

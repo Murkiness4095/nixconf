@@ -466,7 +466,7 @@
             // You can change how the focus ring looks.
             focus-ring {
                 // Uncomment this line to disable the focus ring.
-                on
+                off
 
                 // How many logical pixels the ring extends out from the windows.
                 width 4
@@ -508,9 +508,10 @@
             border {
                 // The settings are the same as for the focus ring.
                 // If you enable the border, you probably want to disable the focus ring.
+                on
 
-                width 1.5
-                active-color "#ffc87f"
+                width 6
+                active-gradient angle=45 from="89ddff" relative-to="window" to="ffcb6b"
                 inactive-color "#505050"
 
                 // Color of the border around windows that request your attention.
@@ -590,9 +591,9 @@
             scale 1.5
             transform "normal"
             position x=0 y=0
+
             // 关闭笔记本内屏
             off
-
         }
 
         // 外接 KTC 显示器 (1080p 120Hz)

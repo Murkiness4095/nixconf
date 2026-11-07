@@ -49,25 +49,12 @@
         selfpkgs.librewolf
 
         # nixpak-apps
-        nixpakApps.vesktop # 内置 Vencord 的 Discord 替代客户端
-        nixpakApps.nheko # Desktop client for the Matrix protocol
-        nixpakApps.telegram
-        nixpakApps.dingtalk
-        nixpakApps.feishu
         nixpakApps.qq
         nixpakApps.wechat
-        nixpakApps.wechat-uos
-        nixpakApps.heroic
-
-        # download
-        qbittorrent-enhanced
-        yt-dlp
 
         # editor
         selfpkgs.vscode
         selfpkgs.zed
-        kdePackages.kate
-        kdePackages.plasma-integration
 
         # terminal
         selfpkgs.alacritty
@@ -89,14 +76,11 @@
 
         # tools
         localsend
+        mangohud
 
         # 剪贴板
         wl-clipboard
         cliphist
-
-        # gaming
-        hmcl
-        mangohud
 
         # 截图
         grim
@@ -104,11 +88,6 @@
         satty # 截图编辑标注
 
         file-roller # 解压工具
-
-        # 控屏
-        # input-leap  # kvm软件
-        rustdesk-flutter
-        moonlight-qt
 
         nwg-look # 设置gtk主题
 

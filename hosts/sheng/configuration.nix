@@ -20,9 +20,6 @@
 
       self.nixosModules.sops-nix
 
-      # agents
-      self.nixosModules.agents
-
       self.nixosModules.mihomo
     ];
     # 当前是双系统，必须保留 linux 根分区。
