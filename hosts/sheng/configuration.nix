@@ -18,6 +18,7 @@
       self.nixosModules.pipewire
       self.nixosModules.power
 
+      self.nixosModules.sheng-persistence
       self.nixosModules.sops-nix
 
       self.nixosModules.mihomo
