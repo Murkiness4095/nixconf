@@ -38,9 +38,21 @@
             "Documents"
             "Pictures"
             "Downloads"
-            ".local/state/nix"
-            ".config/niri"
-            ".config/noctalia"
+
+            ".config"
+            ".local/share"
+            ".local/state"
+            ".ssh"
+            ".vscode"
+            ".var"
+            ".agents"
+            ".codex"
+            ".omp"
+            ".pi"
+            "Games"
+            ".renpy"
+            ".steam"
+            ".wine"
             {
               directory = ".local/share/keyrings";
               mode = "0700";
