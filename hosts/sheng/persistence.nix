@@ -36,7 +36,6 @@
           directories = [
             # Current config checkout; do not lose it with the volatile home.
             "Downloads"
-
             ".config"
             ".local/share"
             ".local/state"
@@ -50,6 +49,8 @@
             ".renpy"
             ".steam"
             ".wine"
+
+            ".cache/fuzzel"
             {
               directory = ".local/share/keyrings";
               mode = "0700";
