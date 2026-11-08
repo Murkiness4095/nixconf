@@ -31,19 +31,22 @@
           }
         ];
 
-        users.${user}.directories = [
-          # Current config checkout; do not lose it with the volatile home.
-          "Documents"
-          "Pictures"
-          "Downloads"
-          ".local/state/nix"
-          ".config/niri"
-          ".config/noctalia"
-          {
-            directory = ".local/share/keyrings";
-            mode = "0700";
-          }
-        ];
+        users.${user} = {
+          commonMountOptions = [ "x-gvfs-hide" ];
+          directories = [
+            # Current config checkout; do not lose it with the volatile home.
+            "Documents"
+            "Pictures"
+            "Downloads"
+            ".local/state/nix"
+            ".config/niri"
+            ".config/noctalia"
+            {
+              directory = ".local/share/keyrings";
+              mode = "0700";
+            }
+          ];
+        };
       };
 
       # Retain boot diagnostics without unbounded persistent journal growth.
