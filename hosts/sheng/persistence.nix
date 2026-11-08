@@ -35,14 +35,11 @@
           commonMountOptions = [ "x-gvfs-hide" ];
           directories = [
             # Current config checkout; do not lose it with the volatile home.
-            "Documents"
-            "Pictures"
             "Downloads"
 
             ".config"
             ".local/share"
             ".local/state"
-            ".ssh"
             ".vscode"
             ".var"
             ".agents"
