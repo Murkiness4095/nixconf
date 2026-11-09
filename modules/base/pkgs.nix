@@ -28,60 +28,56 @@
         package = pkgs.yazi;
       };
 
-      environment.systemPackages =
-        with pkgs;
-        [
-          # base
-          selfpkgs.git
-          selfpkgs.fastfetch
-          selfpkgs.neovim
-          vim
-          wget
-          curl
+      environment.systemPackages = with pkgs; [
+        # base
+        selfpkgs.git
+        selfpkgs.fastfetch
+        selfpkgs.neovim
+        selfpkgs.napcat
+        vim
+        wget
+        curl
 
-          just
+        just
 
-          atftp # 或者 tftp-hpa
+        atftp # 或者 tftp-hpa
 
-          whois
-          lshw
-          smartmontools
-          parted
-          dmidecode
-          nix-ld
-          tree
-          icu
+        whois
+        lshw
+        smartmontools
+        parted
+        dmidecode
+        nix-ld
+        tree
+        icu
 
-          sops
+        sops
 
-          # CLI / dev tools
-          gh
-          btop
-          wlr-randr
-          nh
-          nix-output-monitor
-          nvd
-          nix-tree
-          nil
-          nixfmt
-          nixpkgs-fmt
-          mcp-nixos
-          herdr
+        # CLI / dev tools
+        gh
+        btop
+        wlr-randr
+        nh
+        nix-output-monitor
+        nvd
+        nix-tree
+        nil
+        nixfmt
+        nixpkgs-fmt
+        mcp-nixos
+        herdr
 
-          # yazi preview deps
-          file # 用于检测文件类型
-          fd # 快速文件搜索
-          ripgrep # 内容搜索
-          fzf # 模糊找文件
-          imagemagick # 图片预览核心
-          ffmpegthumbnailer # 视频预览
-          (lib.lowPrio poppler-utils)
-          ffmpeg-full
+        # yazi preview deps
+        file # 用于检测文件类型
+        fd # 快速文件搜索
+        ripgrep # 内容搜索
+        fzf # 模糊找文件
+        imagemagick # 图片预览核心
+        ffmpegthumbnailer # 视频预览
+        (lib.lowPrio poppler-utils)
+        ffmpeg-full
 
-          microfetch
-        ]
-        ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [
-          selfpkgs.napcat
-        ];
+        microfetch
+      ];
     };
 }
