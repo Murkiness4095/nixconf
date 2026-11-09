@@ -60,9 +60,6 @@
         # gaming
         mangohud
         # proton/wine
-        protonplus
-        umu-launcher
-        winetricks
 
         # editor
         selfpkgs.vscode
