@@ -17,6 +17,7 @@
       self.nixosModules.desktop-sheng
       self.nixosModules.pipewire
       self.nixosModules.power
+      self.nixosModules.zram
 
       self.nixosModules.sheng-persistence
       self.nixosModules.sops-nix
@@ -34,7 +35,7 @@
     boot.kernelParams = [ "mem_sleep_default=s2idle" ];
 
     # This tablet has no backing swap device; zswap requires one.
-    zramSwap.enable = true;
+    # zramSwap.enable = true;
 
     networking.hostName = "sheng";
     networking.networkmanager = {

@@ -8,6 +8,8 @@
     in
     {
       imports = [
+        inputs.steam-aarch64.nixosModules.default
+
         self.nixosModules.greeter
         self.nixosModules.thunar
         self.nixosModules.fcitx5
@@ -33,6 +35,8 @@
 
         recommendedServices.enable = true;
       };
+
+      programs.steam-aarch64.enable = true;
 
       environment.systemPackages = with pkgs; [
         uwsm

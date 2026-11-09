@@ -15,7 +15,7 @@
       self.nixosModules.base
 
       self.diskoConfigurations.n305
-      self.nixosModules.impermanence
+      self.nixosModules.preservation
       self.nixosModules.sops-nix
 
       self.nixosModules.zswap

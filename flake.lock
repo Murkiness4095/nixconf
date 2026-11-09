@@ -702,6 +702,7 @@
         "omp-nix": "omp-nix",
         "preservation": "preservation",
         "sops-nix": "sops-nix",
+        "steam-aarch64": "steam-aarch64",
         "wrapper-modules": "wrapper-modules"
       }
     },
@@ -720,6 +721,26 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "steam-aarch64": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791213365,
+        "narHash": "sha256-M1JsxFBncYd/Ck3iL/BmdGlFG3aOODhdq3W5Zx2M/wM=",
+        "owner": "kossLAN",
+        "repo": "steam-aarch64-nix",
+        "rev": "4a76a87366a519ca4fa7a5c00a9b419ee367c3cd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kossLAN",
+        "repo": "steam-aarch64-nix",
         "type": "github"
       }
     },

@@ -39,6 +39,10 @@
       url = "github:Murkiness4095/nixpak-apps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    steam-aarch64 = {
+      url = "github:kossLAN/steam-aarch64-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Import all .nix files from current directory except flake.nix recursively
