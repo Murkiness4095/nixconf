@@ -49,9 +49,21 @@
         selfpkgs.librewolf
 
         # nixpak-apps
-        nixpakApps.heroic
+        nixpakApps.telegram
+        nixpakApps.dingtalk
+        nixpakApps.feishu
         nixpakApps.qq
         nixpakApps.wechat
+        nixpakApps.wechat-uos
+        nixpakApps.heroic
+
+        # gaming
+        mangohud
+        # proton/wine
+        protonplus
+        umu-launcher
+        protontricks
+        winetricks
 
         # editor
         selfpkgs.vscode
