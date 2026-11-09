@@ -17,7 +17,7 @@
   ...
 }:
 let
-  version = "2.4.2";
+  version = "2.4.3";
 
   releaseUrl =
     artifact: "https://github.com/Predidit/Kazumi/releases/download/${version}/${artifact}";
@@ -27,15 +27,15 @@ let
   sources = {
     x86_64-linux = {
       artifact = "Kazumi_linux_${version}_amd64.deb";
-      hash = "sha256-vxvPDMy50urtsyVCm25qL654qo/gHM6MfL4vFVcHQZ0=";
+      hash = "sha256-3BdzSM4MLr3oRW86aa6zB8jyn3qACQagZQTPeQqqxIk=";
     };
     aarch64-linux = {
       artifact = "Kazumi_linux_${version}_arm64.deb";
-      hash = "sha256-+XH23QQLLfqxGU9F53L3A/bGN3uq/R0YBggff/aafy4=";
+      hash = "sha256-16ooC2sf91F7HpCHkqk56sRaDmTC3rM40HqbrQ/Ntm8=";
     };
     aarch64-darwin = {
       artifact = "Kazumi_macos_${version}.dmg";
-      hash = "sha256-MltS0vG4SkgsldrB8Tltq6nRBvKuTq2hlnexXBTPOac=";
+      hash = "sha256-iq0BouI/mw/qtIE0PkQjiQjH+Hu6yI383PWTnDADi7o=";
     };
   };
 

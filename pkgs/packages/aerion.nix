@@ -24,12 +24,12 @@
       # ── 官方发行版声明：跟随官方更新的唯一改动点 ──────────────────────────
       release = {
         # Releases 页最新 tag
-        tag = "v0.3.5";
+        tag = "v0.3.6";
         # Info.plist / 包版本
-        version = "0.3.5";
-        sha256."aerion-linux-amd64.tar.gz" = "sha256-svNa4eMODk7jQV+37+IvbubwZ1LQrXqkK3+NSLpr92o=";
-        sha256."aerion-linux-arm64.tar.gz" = "sha256-81W44QAAanhPOxKdsFEHHwN0o+Krx2F1PrZETdFLtko=";
-        sha256."Aerion-darwin-arm64.zip" = "sha256-DS4B3QUFsT7fwocpDFcyKFmn/MefihQt/5TGuuvqdJA=";
+        version = "0.3.6";
+        sha256."aerion-linux-amd64.tar.gz" = "sha256-C/2b8vMxQXxawDs1eiDPXB+7cgnhJMkc0wxI7JWYXfs=";
+        sha256."aerion-linux-arm64.tar.gz" = "sha256-1cSGa9Wa89CXVYOZckkxn+IZIFhdqIuM/AVZJ5FY1KM=";
+        sha256."Aerion-darwin-arm64.zip" = "sha256-m7YT1AK99bi+7qZZJtwsE7s3kAPAjf0Ti9B1C6Oq52c=";
       };
       baseUrl = "https://github.com/hkdb/aerion/releases/download/${release.tag}";
 

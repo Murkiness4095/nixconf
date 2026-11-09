@@ -17,7 +17,7 @@
         config.allowUnfree = true;
       };
 
-      version = "0.9.33";
+      version = "0.9.39";
       pname = "omp-gui";
       owner = "nornzach";
       repo = "oh-my-pi-gui";
@@ -27,8 +27,8 @@
       # each release asset. Update the version and these hashes when upstream
       # ships a new release.
       hashes = {
-        appimage = "sha256-hg3SLXZwCIWDoPlsQJkbRxbphrcp0PTW/WqzcsvFUo4=";
-        dmg = "sha256-kdOvR7v58gxlax/f1H+1W4Y4eRmL3QzCWDxwEOMLN0U=";
+        appimage = "sha256-cUIYlYFevZmY8RtGgSoK2xtPHOsgW9KZyxKHjJkbgkc=";
+        dmg = "sha256-KZrNZkDmMU8B6O5ov9+H5CSWuj/DgmMHaJ7+u/gDupY=";
       };
 
       meta = {

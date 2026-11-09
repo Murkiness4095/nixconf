@@ -1,7 +1,7 @@
 { lib, ... }:
 let
   # 版本号：官方更新后只需修改此处并重新计算 sha256
-  version = "158.0.1-1";
+  version = "159.0.1-1";
 
   # 发布页（人类可读）：https://codeberg.org/librewolf/bsys6/releases
   # 官方 CDN 的版本目录和文件名均由 version 派生，升级只改版本与各平台 hash。
@@ -13,15 +13,15 @@ let
   artifacts = {
     x86_64-linux = {
       file = "${pname}-${version}-linux-x86_64-appimage.AppImage";
-      hash = "sha256-nfPoczVycwtWEKIc9KsJW1Aj0b3ZaIdnFWpLxc75j6s=";
+      hash = "sha256-Brwyp+g3WdRUyRiKcbI2sT+CqBrF8qZf+xOqlKcVFyQ=";
     };
     aarch64-linux = {
       file = "${pname}-${version}-linux-arm64-appimage.AppImage";
-      hash = "sha256-NbQwlY4PdToducAYNfZkrq7ClTLq0lGWE/T0OqyE+sg=";
+      hash = "sha256-Pw2htxei6nkIR52VLXO5YqjQ7I1+WyqLweba8/Kgals=";
     };
     aarch64-darwin = {
       file = "${pname}-${version}-macos-arm64-package.dmg";
-      hash = "sha256-GWww7dTz4kmajZWZZ6aUT8L7R4Tgm6sBz1adr2gtrA8=";
+      hash = "sha256-7ZKxOgFQWf2i4n6LLF3n2AGEPl+g1+6SsRvUh/XGi/Q=";
     };
   };
 in
