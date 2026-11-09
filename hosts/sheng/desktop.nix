@@ -62,7 +62,6 @@
         # proton/wine
         protonplus
         umu-launcher
-        protontricks
         winetricks
 
         # editor
