@@ -60,6 +60,8 @@
         # gaming
         mangohud
         # proton/wine
+        protonplus
+        winetricks
 
         # editor
         selfpkgs.vscode
