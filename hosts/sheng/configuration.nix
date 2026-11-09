@@ -29,6 +29,10 @@
     # 控制 U-Boot 菜单保留的系统世代数量。
     sheng.boot.configurationLimit = 10;
 
+    # USB-connected deep suspend woke early; s2idle passed timed wake tests.
+    # Host-specific candidate; this is suspend-to-RAM and does not need swap.
+    boot.kernelParams = [ "mem_sleep_default=s2idle" ];
+
     # This tablet has no backing swap device; zswap requires one.
     zramSwap.enable = true;
 
