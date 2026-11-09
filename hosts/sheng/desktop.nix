@@ -49,6 +49,7 @@
         selfpkgs.librewolf
 
         # nixpak-apps
+        nixpakApps.heroic
         nixpakApps.qq
         nixpakApps.wechat
 
