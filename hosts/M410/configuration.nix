@@ -135,7 +135,7 @@
 
       environment.systemPackages = with pkgs; [
         # browser
-        brave-origin
+        selfpkgs.brave-origin
         selfpkgs.librewolf
 
         # chat

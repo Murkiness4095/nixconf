@@ -12,7 +12,6 @@
       # NixOS rejects nixpkgs.config when nixpkgs.pkgs is supplied externally.
       nixpkgs.config = lib.mkIf (!options.nixpkgs.pkgs.isDefined) {
         allowUnfree = true;
-        problems.handlers.fastmcp-slim.broken = "ignore";
       };
       # Automatically creates a loader in /lib/* to avoid patching stuff
       # To disable it temporarily use
@@ -56,10 +55,6 @@
 
             # Required
             glib
-          ]
-          ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [
-            # Retain GTK2 for legacy x86 binaries; the sheng baseline marks it broken.
-            gtk2
           ]
           ++ [
             # Inspired by steam

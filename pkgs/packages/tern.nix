@@ -12,8 +12,8 @@
         config.allowUnfree = true;
       };
 
-      version = "0.9.10";
-      buildId = "20261102-152242-2ad447b";
+      version = "0.9.16";
+      buildId = "20261110-215112-41a10a5";
       pname = "tern";
       baseUrl = "https://build.stencil.so/d/tern/${buildId}";
 
@@ -27,15 +27,15 @@
       assets = {
         x86_64-linux = {
           asset = "Tern-${version}-linux-x86_64.tar.gz";
-          sha256 = "5bd782328df0ee2330f34f60c407a2f0252bac6e806e620d22b744bcead4c6d5";
+          sha256 = "c687e317622b428846b008da50c700ce19216a7fdf5d19555bb80d6998a87c3d";
         };
         aarch64-linux = {
           asset = "Tern-${version}-linux-arm64.tar.gz";
-          sha256 = "a78ce59dcf857296c6d6d1c6801df7f4ce35281ce58ffc8e41777baa491d9cb4";
+          sha256 = "6fed2ecbb6fd57b87906da1392d7da1d1722aafff58bf616a4b98206182028b0";
         };
         aarch64-darwin = {
           asset = "Tern-${version}-macos-arm64.dmg";
-          sha256 = "4e0bcdd358ac14214bf7f0c2a0e995e392232ab4c6530c216edc8a29be454b28";
+          sha256 = "1317f7eba454a098c79a67352ab35466e53e421f24bbe30679af0c4a91b1d366";
         };
       };
 

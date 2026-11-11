@@ -34,9 +34,6 @@
     # Host-specific candidate; this is suspend-to-RAM and does not need swap.
     boot.kernelParams = [ "mem_sleep_default=s2idle" ];
 
-    # This tablet has no backing swap device; zswap requires one.
-    # zramSwap.enable = true;
-
     networking.hostName = "sheng";
     networking.networkmanager = {
       enable = true;

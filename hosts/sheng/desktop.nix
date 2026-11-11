@@ -15,8 +15,6 @@
         self.nixosModules.fcitx5
         self.nixosModules.hjem
         self.nixosModules.theme
-        self.nixosModules.i18n
-        self.nixosModules.display-control
       ];
 
       programs.niri = {
@@ -49,7 +47,7 @@
         selfpkgs.fuzzel
 
         # browser
-        brave-origin
+        selfpkgs.brave-origin
         selfpkgs.librewolf
 
         # nixpak-apps

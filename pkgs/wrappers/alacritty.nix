@@ -20,7 +20,7 @@
         };
 
         font = {
-          size = 14.0;
+          size = 15.0;
           normal = {
             family = "ComicShannsMono Nerd Font";
             style = "Regular";
@@ -37,40 +37,40 @@
 
         colors = {
           primary = {
-            background = "#111418";
-            foreground = "#e1e2e8";
+            background = "#242424";
+            foreground = "#fbf1c7";
           };
 
           selection = {
-            text = "#e1e2e8";
-            background = "#1a4975";
+            text = "#504945";
+            background = "#3c3836";
           };
 
           cursor = {
-            text = "#111418";
-            cursor = "#a0cafd";
+            text = "#242424";
+            cursor = "#fbf1c7";
           };
 
           normal = {
-            black = "#111418";
-            red = "#ff729c";
-            green = "#7efd8f";
-            yellow = "#fff772";
-            blue = "#86b6f0";
-            magenta = "#264975";
-            cyan = "#a0cafd";
-            white = "#eff6ff";
+            black = "#242424";
+            red = "#fb4934";
+            green = "#b8bb26";
+            yellow = "#fabd2f";
+            blue = "#7daea3";
+            magenta = "#e089a1";
+            cyan = "#8ec07c";
+            white = "#665c54";
           };
 
           bright = {
-            black = "#989da4";
-            red = "#ff9fbb";
-            green = "#a5ffb1";
-            yellow = "#fffaa5";
-            blue = "#afd3ff";
-            magenta = "#bddbff";
-            cyan = "#d4e7ff";
-            white = "#f8fbff";
+            black = "#3c3836";
+            red = "#fb4934";
+            green = "#b8bb26";
+            yellow = "#fabd2f";
+            blue = "#7daea3";
+            magenta = "#e089a1";
+            cyan = "#8ec07c";
+            white = "#665c54";
           };
         };
       };

@@ -28,7 +28,8 @@
       asset = "DengShell-linux-x64.deb";
       srcUrl = "https://github.com/BitsFlowCloud/DengShell/releases/download/${release.tag}/${asset}";
 
-      supported = pkgs.stdenv.hostPlatform.parsed.cpu.name == "x86_64" && pkgs.stdenv.hostPlatform.isLinux;
+      supported =
+        pkgs.stdenv.hostPlatform.parsed.cpu.name == "x86_64" && pkgs.stdenv.hostPlatform.isLinux;
 
       # deb Depends: libc6 >= 2.35, libgtk-3-0 | libgtk-3-0t64, libwebkit2gtk-4.1-0,
       #             iputils-ping, bash
@@ -51,69 +52,68 @@
         iputils
       ];
 
-      pkg =
-        pkgs.stdenv.mkDerivation {
-          pname = "dengshell";
-          inherit (release) version;
-          src = pkgs.fetchurl {
-            url = srcUrl;
-            inherit (release) sha256;
-          };
-
-          # 用 dpkg 直接解 deb，不走 unpackPhase
-          nativeBuildInputs = [
-            pkgs.dpkg
-            pkgs.makeWrapper
-          ];
-          dontUnpack = true;
-
-          # patchelf 会破坏这个 Go 二进制的入口（启动即 SIGSEGV），
-          # 因此保留上游 ELF，仅用 wrapper 提供库路径。
-          dontAutoPatchelf = true;
-          buildInputs = runtimeLibs;
-
-          installPhase = ''
-            runHook preInstall
-
-            dpkg-deb --extract "$src" .
-            chmod -R u+w .
-
-            # start.sh 会 cd 到自身 ../.. 并以相对路径找 ./dengshell，
-            # 所以整个 opt/dengshell 树（含 support/docs/licenses）原样保留。
-            mkdir -p "$out/libexec/dengshell"
-            cp -r opt/dengshell/. "$out/libexec/dengshell/"
-            chmod 0755 \
-              "$out/libexec/dengshell/dengshell" \
-              "$out/libexec/dengshell/data/support/start.sh"
-
-            install -Dm644 usr/share/icons/hicolor/256x256/apps/dengshell.png \
-              "$out/share/icons/hicolor/256x256/apps/dengshell.png"
-            install -Dm644 usr/share/doc/dengshell/copyright \
-              "$out/share/doc/dengshell/copyright"
-
-            install -Dm644 usr/share/applications/dengshell.desktop \
-              "$out/share/applications/dengshell.desktop"
-            # 官方 desktop 项 Exec 写死 /opt/dengshell，Nix 下改写为带环境的 wrapper
-            substituteInPlace "$out/share/applications/dengshell.desktop" \
-              --replace-fail /opt/dengshell/data/support/start.sh "$out/bin/dengshell"
-
-            makeWrapper "$out/libexec/dengshell/data/support/start.sh" "$out/bin/dengshell" \
-              --prefix PATH : ${lib.makeBinPath runtimeBins} \
-              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeLibs} \
-              --set-default WEBKIT_DISABLE_DMABUF_RENDERER 1 \
-              --suffix XDG_DATA_DIRS : "$out/share:${pkgs.gdk-pixbuf}/share"
-
-            runHook postInstall
-          '';
-
-          meta = {
-            description = "Native SSH terminal and server workbench (GTK3 / WebKitGTK 4.1)";
-            homepage = "https://github.com/BitsFlowCloud/DengShell";
-            license = lib.licenses.mit;
-            mainProgram = "dengshell";
-            platforms = lib.platforms.linux;
-          };
+      pkg = pkgs.stdenv.mkDerivation {
+        pname = "dengshell";
+        inherit (release) version;
+        src = pkgs.fetchurl {
+          url = srcUrl;
+          inherit (release) sha256;
         };
+
+        # 用 dpkg 直接解 deb，不走 unpackPhase
+        nativeBuildInputs = [
+          pkgs.dpkg
+          pkgs.makeWrapper
+        ];
+        dontUnpack = true;
+
+        # patchelf 会破坏这个 Go 二进制的入口（启动即 SIGSEGV），
+        # 因此保留上游 ELF，仅用 wrapper 提供库路径。
+        dontAutoPatchelf = true;
+        buildInputs = runtimeLibs;
+
+        installPhase = ''
+          runHook preInstall
+
+          dpkg-deb --extract "$src" .
+          chmod -R u+w .
+
+          # start.sh 会 cd 到自身 ../.. 并以相对路径找 ./dengshell，
+          # 所以整个 opt/dengshell 树（含 support/docs/licenses）原样保留。
+          mkdir -p "$out/libexec/dengshell"
+          cp -r opt/dengshell/. "$out/libexec/dengshell/"
+          chmod 0755 \
+            "$out/libexec/dengshell/dengshell" \
+            "$out/libexec/dengshell/data/support/start.sh"
+
+          install -Dm644 usr/share/icons/hicolor/256x256/apps/dengshell.png \
+            "$out/share/icons/hicolor/256x256/apps/dengshell.png"
+          install -Dm644 usr/share/doc/dengshell/copyright \
+            "$out/share/doc/dengshell/copyright"
+
+          install -Dm644 usr/share/applications/dengshell.desktop \
+            "$out/share/applications/dengshell.desktop"
+          # 官方 desktop 项 Exec 写死 /opt/dengshell，Nix 下改写为带环境的 wrapper
+          substituteInPlace "$out/share/applications/dengshell.desktop" \
+            --replace-fail /opt/dengshell/data/support/start.sh "$out/bin/dengshell"
+
+          makeWrapper "$out/libexec/dengshell/data/support/start.sh" "$out/bin/dengshell" \
+            --prefix PATH : ${lib.makeBinPath runtimeBins} \
+            --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeLibs} \
+            --set-default WEBKIT_DISABLE_DMABUF_RENDERER 1 \
+            --suffix XDG_DATA_DIRS : "$out/share:${pkgs.gdk-pixbuf}/share"
+
+          runHook postInstall
+        '';
+
+        meta = {
+          description = "Native SSH terminal and server workbench (GTK3 / WebKitGTK 4.1)";
+          homepage = "https://github.com/BitsFlowCloud/DengShell";
+          license = lib.licenses.mit;
+          mainProgram = "dengshell";
+          platforms = lib.platforms.linux;
+        };
+      };
     in
     {
       packages.dengshell = lib.mkIf supported pkg;
@@ -126,16 +126,23 @@
       # 真实不变量：官方 ELF 在当前 nixpkgs 的 glibc / GTK / WebKit 下必须全部解析得到，
       # 否则 start.sh 的启动前检查会直接拒绝启动。
       checks.dengshell-links = lib.mkIf supported (
-        pkgs.runCommand "dengshell-links-check" { nativeBuildInputs = [ pkgs.glibc pkgs.binutils ]; } ''
-          export LD_LIBRARY_PATH=${lib.makeLibraryPath runtimeLibs}
-          missing=$(LC_ALL=C ldd ${pkg}/libexec/dengshell/dengshell | grep 'not found' || true)
-          if [ -n "$missing" ]; then
-            echo "DengShell ELF 存在未解析的依赖：" >&2
-            echo "$missing" >&2
-            exit 1
-          fi
-          touch $out
-        ''
+        pkgs.runCommand "dengshell-links-check"
+          {
+            nativeBuildInputs = [
+              pkgs.glibc
+              pkgs.binutils
+            ];
+          }
+          ''
+            export LD_LIBRARY_PATH=${lib.makeLibraryPath runtimeLibs}
+            missing=$(LC_ALL=C ldd ${pkg}/libexec/dengshell/dengshell | grep 'not found' || true)
+            if [ -n "$missing" ]; then
+              echo "DengShell ELF 存在未解析的依赖：" >&2
+              echo "$missing" >&2
+              exit 1
+            fi
+            touch $out
+          ''
       );
     };
 
