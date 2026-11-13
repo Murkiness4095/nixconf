@@ -1,3 +1,7 @@
+{ config, ... }:
+let
+  t = config.flake.theme;
+in
 {
   flake.wrappers.alacritty =
     {
@@ -37,40 +41,40 @@
 
         colors = {
           primary = {
-            background = "#242424";
-            foreground = "#fbf1c7";
+            background = t.base00;
+            foreground = t.base05;
           };
 
           selection = {
-            text = "#504945";
-            background = "#3c3836";
+            text = t.base02;
+            background = t.base01;
           };
 
           cursor = {
-            text = "#242424";
-            cursor = "#fbf1c7";
+            text = t.base00;
+            cursor = t.base0C;
           };
 
           normal = {
-            black = "#242424";
-            red = "#fb4934";
-            green = "#b8bb26";
-            yellow = "#fabd2f";
-            blue = "#7daea3";
-            magenta = "#e089a1";
-            cyan = "#8ec07c";
-            white = "#665c54";
+            black = t.base00;
+            red = t.base08;
+            green = t.base0B;
+            yellow = t.base0A;
+            blue = t.base0D;
+            magenta = t.base0E;
+            cyan = t.base0C;
+            white = t.base03;
           };
 
           bright = {
-            black = "#3c3836";
-            red = "#fb4934";
-            green = "#b8bb26";
-            yellow = "#fabd2f";
-            blue = "#7daea3";
-            magenta = "#e089a1";
-            cyan = "#8ec07c";
-            white = "#665c54";
+            black = t.base01;
+            red = t.base08;
+            green = t.base0B;
+            yellow = t.base0A;
+            blue = t.base0D;
+            magenta = t.base0E;
+            cyan = t.base0C;
+            white = t.base03;
           };
         };
       };
