@@ -27,15 +27,7 @@
         self.nixosModules.sops-nix
 
         self.nixosModules.fcitx5
-        # self.nixosModules.desktop-pkgs
-        # self.nixosModules.system-pkgs
-        self.nixosModules.alacritty
-        self.nixosModules.kitty
         self.nixosModules.theme
-        self.nixosModules.vscode
-        self.nixosModules.zed
-
-        self.nixosModules.i18n
         self.nixosModules.display-control
         self.nixosModules.pipewire
         self.nixosModules.power
@@ -151,7 +143,7 @@
         yt-dlp
 
         # media
-        kazumi
+        selfpkgs.kazumi
         obs-studio
         celluloid # video
         imv # image
