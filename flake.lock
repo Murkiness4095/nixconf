@@ -364,14 +364,15 @@
     "nixos-sheng": {
       "inputs": {
         "nixpkgs": "nixpkgs_5",
+        "u-boot-efi-src": "u-boot-efi-src",
         "u-boot-src": "u-boot-src"
       },
       "locked": {
-        "lastModified": 1794578704,
-        "narHash": "sha256-OGeje4vnDEzngWurtaSwSiJEMNV6BNNGKFKIt05nc60=",
+        "lastModified": 1794588066,
+        "narHash": "sha256-oDQs7TxgnsUWA8bmGGW8CBHBlaX6geEzzv8GIQxBtoU=",
         "owner": "Murkiness4095",
         "repo": "nixos-sheng",
-        "rev": "ff5df2c35900dec9c9f7ccfc48ff0e11314c83aa",
+        "rev": "9850bd2daaae71af654e431939ee924651976f7e",
         "type": "github"
       },
       "original": {
@@ -780,18 +781,35 @@
         "type": "github"
       }
     },
+    "u-boot-efi-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794582309,
+        "narHash": "sha256-cEo0v9jV5k7AvpRNHCLOMAvAWfOlYrUaJEVoknJl3qY=",
+        "owner": "Murkiness4095",
+        "repo": "u-boot",
+        "rev": "5d7445dfb0551aec8a3e2ad23367cabe5695351a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Murkiness4095",
+        "repo": "u-boot",
+        "rev": "5d7445dfb0551aec8a3e2ad23367cabe5695351a",
+        "type": "github"
+      }
+    },
     "u-boot-src": {
       "flake": false,
       "locked": {
         "lastModified": 1787502608,
         "narHash": "sha256-Y1TQnXczQivmn05qCRvHygjinBy/I553u//aJCHb7Gc=",
-        "owner": "SushyDev",
+        "owner": "Murkiness4095",
         "repo": "u-boot",
         "rev": "7025b792e2884c5fb4747d891e30002ea029048a",
         "type": "github"
       },
       "original": {
-        "owner": "SushyDev",
+        "owner": "Murkiness4095",
         "ref": "xiaomi-sheng",
         "repo": "u-boot",
         "type": "github"
