@@ -678,6 +678,7 @@
         // spawn-at-startup "waybar"
         // spawn-at-startup "dms" "run"
         // spawn-at-startup "noctalia"
+          include optional=true "/etc/niri/host.kdl"
           include optional=true "~/.config/niri/local.kdl"
       '';
       config.disableConfigHotReload = true;

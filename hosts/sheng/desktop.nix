@@ -17,6 +17,12 @@
         self.nixosModules.theme
       ];
 
+      environment.etc."niri/host.kdl".text = ''
+        input {
+          disable-power-key-handling
+        }
+      '';
+
       programs.niri = {
         enable = true;
         package = selfpkgs.niri;
