@@ -681,7 +681,7 @@
           variant = "default"
 
           [[shell.session.actions]]
-          action = "suspend"
+          action = "lock_and_suspend"
           command = ""
           countdown_seconds = 0.0
           enabled = true
