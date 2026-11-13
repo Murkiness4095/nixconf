@@ -43,6 +43,27 @@ in
         inherit pname version src;
       };
 
+      # LibreWolf 默认 privacy.sanitize.sanitizeOnShutdown = true，且未显式关闭
+      # cookies/storage，导致关闭/重启后所有站点登录丢失（只有 Firefox Account 保留）。
+      # 用系统策略关掉 sanitiser，避免依赖 profile 里的 user.js。
+      patchedContents =
+        pkgs.runCommand "librewolf-${version}-contents" { nativeBuildInputs = [ pkgs.jq ]; }
+          ''
+            cp -r ${appimageContents} $out
+            chmod -R u+w $out
+            jq '.policies.SanitizeOnShutdown = {
+              Cookies: false,
+              Cache: false,
+              SiteSettings: false,
+              OfflineApps: false,
+              Sessions: false,
+              History: false,
+              FormData: false,
+              Downloads: false
+            }' "$out/usr/bin/distribution/policies.json" > "$out/usr/bin/distribution/policies.json.new"
+            mv "$out/usr/bin/distribution/policies.json.new" "$out/usr/bin/distribution/policies.json"
+          '';
+
       meta = {
         description = "A custom version of Firefox, focused on privacy, security and freedom";
         homepage = "https://librewolf.net";
@@ -88,13 +109,14 @@ in
             '';
           }
         else
-          pkgs.appimageTools.wrapType2 {
+          pkgs.appimageTools.wrapAppImage {
             inherit
               pname
               version
-              src
               meta
               ;
+
+            contents = patchedContents;
 
             extraPkgs =
               pkgs: with pkgs; [
