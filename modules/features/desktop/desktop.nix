@@ -14,7 +14,7 @@
         # self.nixosModules.ibus
         self.nixosModules.desktop-pkgs
         self.nixosModules.hjem
-        self.nixosModules.theme
+        self.nixosModules.gtk
         self.nixosModules.gaming
 
         self.nixosModules.i18n

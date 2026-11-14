@@ -14,7 +14,7 @@
         self.nixosModules.thunar
         self.nixosModules.fcitx5
         self.nixosModules.hjem
-        self.nixosModules.theme
+        self.nixosModules.gtk
       ];
 
       environment.etc."niri/host.kdl".text = ''

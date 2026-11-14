@@ -27,7 +27,7 @@
         self.nixosModules.sops-nix
 
         self.nixosModules.fcitx5
-        self.nixosModules.theme
+        self.nixosModules.gtk
         self.nixosModules.display-control
         self.nixosModules.pipewire
         self.nixosModules.power
