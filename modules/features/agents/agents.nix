@@ -10,12 +10,6 @@
       selfpkgs = self.packages."${pkgs.stdenv.hostPlatform.system}";
     in
     {
-      nixpkgs.overlays = [
-        (final: prev: {
-          opencode = prev.callPackage ../../../pkgs/packages/opencode-package.nix.raw { };
-        })
-      ];
-
       environment.systemPackages =
         with pkgs;
         [
