@@ -34,6 +34,18 @@
     # Host-specific candidate; this is suspend-to-RAM and does not need swap.
     boot.kernelParams = [ "mem_sleep_default=s2idle" ];
 
+    # 平板上的 Steam 是 arm64 客户端，FHS 环境仍依赖 gtk2，而 nixpkgs 已把
+    # gtk2 标记为 broken（27.05 移除）。shengSystem 直接传入现成的 pkgs，
+    # 其内部 nixpkgs.config 会被忽略，所以单独用带 handler 的 pkgs 实例包一层。
+    programs.steam-aarch64.package =
+      (import inputs.nixpkgs {
+        system = "aarch64-linux";
+        config = {
+          allowUnfree = true;
+          problems.handlers."gtk+".broken = "warn";
+        };
+      }).callPackage "${inputs.steam-aarch64}/package.nix" { };
+
     networking.hostName = "sheng";
     networking.networkmanager = {
       enable = true;
