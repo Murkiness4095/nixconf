@@ -50,6 +50,13 @@
 
       nixpkgs.overlays = [
         inputs.nix-cachyos-kernel.overlays.pinned
+        # splayer-next 1.1.0 的 aws-lc-sys 0.43 在 cargo-setup-hook 强制
+        # AWS_LC_SYS_USE_SYSTEM=1 下找不到系统 AWS-LC；补 buildInputs 即可。
+        (final: prev: {
+          splayer-next = prev.splayer-next.overrideAttrs (p: {
+            buildInputs = p.buildInputs ++ [ prev.aws-lc ];
+          });
+        })
       ];
       # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
       boot.kernelPackages = pkgs.linuxPackages_latest;
