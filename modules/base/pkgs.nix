@@ -33,7 +33,6 @@
         selfpkgs.git
         selfpkgs.fastfetch
         selfpkgs.neovim
-        selfpkgs.napcat
         vim
         wget
         curl
