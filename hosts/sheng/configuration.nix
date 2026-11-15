@@ -6,10 +6,11 @@
 }:
 {
   flake.nixosConfigurations.sheng = inputs.nixos-sheng.lib.shengSystem {
+    overlays = [ (import "${inputs.nixos-sheng}/modules/systemd-boot-mixed-generations.nix") ];
     modules = [ self.nixosModules.node-sheng ];
   };
 
-  flake.nixosModules.node-sheng = { ... }: {
+  flake.nixosModules.node-sheng = { pkgs, ... }: {
     # Add architecture-independent modules from your own configuration here.
     # The shengSystem constructor already imports the complete board support.
     imports = [
@@ -29,6 +30,24 @@
 
     # 控制 U-Boot 菜单保留的系统世代数量。
     sheng.boot.configurationLimit = 10;
+    boot.initrd.enable = true;
+    boot.kernelPackages = lib.mkForce (pkgs.linuxPackagesFor (pkgs.shengKernel // {
+      features = (pkgs.shengKernel.features or { }) // { efiBootStub = true; };
+    }));
+    boot.loader.systemd-boot = {
+      enable = true;
+      installDeviceTree = true;
+      configurationLimit = 10;
+    };
+    boot.loader.efi = {
+      canTouchEfiVariables = false;
+      efiSysMountPoint = "/efi";
+    };
+    fileSystems."/efi" = {
+      device = "/dev/disk/by-partlabel/sheng-esp";
+      fsType = "vfat";
+      options = [ "umask=0077" "nofail" ];
+    };
 
     # USB-connected deep suspend woke early; s2idle passed timed wake tests.
     # Host-specific candidate; this is suspend-to-RAM and does not need swap.

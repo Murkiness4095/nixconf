@@ -419,15 +419,16 @@
     "nixos-sheng": {
       "inputs": {
         "nixpkgs": "nixpkgs_6",
+        "u-boot-efi-internal-src": "u-boot-efi-internal-src",
         "u-boot-efi-src": "u-boot-efi-src",
         "u-boot-src": "u-boot-src"
       },
       "locked": {
-        "lastModified": 1794588066,
-        "narHash": "sha256-oDQs7TxgnsUWA8bmGGW8CBHBlaX6geEzzv8GIQxBtoU=",
+        "lastModified": 1794766651,
+        "narHash": "sha256-vPjhmf4DldEsjlFj1hW9liJGiIZ/xzvT14muryfNLPg=",
         "owner": "Murkiness4095",
         "repo": "nixos-sheng",
-        "rev": "9850bd2daaae71af654e431939ee924651976f7e",
+        "rev": "55135d69f670beb9b79319f8dd5eee975d186e07",
         "type": "github"
       },
       "original": {
@@ -865,6 +866,23 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "u-boot-efi-internal-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794729095,
+        "narHash": "sha256-Mvca8TX/fG2DsCzcUJTVr9ihXke8T/dPukvJayXhmQw=",
+        "owner": "Murkiness4095",
+        "repo": "u-boot",
+        "rev": "adabd4b4365cdf2c3b3dde63c4aca390d610b56c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Murkiness4095",
+        "repo": "u-boot",
+        "rev": "adabd4b4365cdf2c3b3dde63c4aca390d610b56c",
         "type": "github"
       }
     },
