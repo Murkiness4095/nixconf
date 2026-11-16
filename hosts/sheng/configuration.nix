@@ -5,14 +5,13 @@
   ...
 }:
 {
-  flake.nixosConfigurations.sheng = inputs.nixos-sheng.lib.shengSystem {
-    overlays = [ (import "${inputs.nixos-sheng}/modules/systemd-boot-mixed-generations.nix") ];
+  flake.nixosConfigurations.sheng = inputs.nixos-sheng.nixosConfigurations.sheng-dual-efi-generations.extendModules {
     modules = [ self.nixosModules.node-sheng ];
   };
 
-  flake.nixosModules.node-sheng = { pkgs, ... }: {
+  flake.nixosModules.node-sheng = { ... }: {
     # Add architecture-independent modules from your own configuration here.
-    # The shengSystem constructor already imports the complete board support.
+    # The upstream dual EFI configuration supplies board support and the linux root.
     imports = [
       self.nixosModules.base
       self.nixosModules.desktop-sheng
@@ -25,30 +24,10 @@
 
       self.nixosModules.mihomo
     ];
-    # 当前是双系统，必须保留 linux 根分区。
-    sheng.rootfs.partlabel = "linux";
 
     # 控制 U-Boot 菜单保留的系统世代数量。
     sheng.boot.configurationLimit = 10;
-    boot.initrd.enable = true;
-    boot.kernelPackages = lib.mkForce (pkgs.linuxPackagesFor (pkgs.shengKernel // {
-      features = (pkgs.shengKernel.features or { }) // { efiBootStub = true; };
-    }));
-    boot.loader.systemd-boot = {
-      enable = true;
-      installDeviceTree = true;
-      configurationLimit = 10;
-    };
-    boot.loader.efi = {
-      canTouchEfiVariables = false;
-      efiSysMountPoint = "/efi";
-    };
-    fileSystems."/efi" = {
-      device = "/dev/disk/by-partlabel/sheng-esp";
-      fsType = "vfat";
-      options = [ "umask=0077" "nofail" ];
-    };
-
+    boot.loader.systemd-boot.configurationLimit = 10;
     # USB-connected deep suspend woke early; s2idle passed timed wake tests.
     # Host-specific candidate; this is suspend-to-RAM and does not need swap.
     boot.kernelParams = [ "mem_sleep_default=s2idle" ];
@@ -65,7 +44,7 @@
         };
       }).callPackage "${inputs.steam-aarch64}/package.nix" { };
 
-    networking.hostName = "sheng";
+    networking.hostName = lib.mkForce "sheng";
     networking.networkmanager = {
       enable = true;
       wifi.powersave = false;
